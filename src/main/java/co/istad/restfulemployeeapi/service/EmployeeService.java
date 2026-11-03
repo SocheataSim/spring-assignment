@@ -2,6 +2,7 @@ package co.istad.restfulemployeeapi.service;
 
 import co.istad.restfulemployeeapi.dto.CreateEmployeeRequest;
 import co.istad.restfulemployeeapi.dto.EmployeeResponse;
+import co.istad.restfulemployeeapi.dto.UpdateEmployeeRequest;
 
 import java.util.List;
 
@@ -13,4 +14,9 @@ public interface EmployeeService {
 
     EmployeeResponse createEmployee(CreateEmployeeRequest employeeRequest);
 
+    EmployeeResponse updateEmployeeById(Integer id, UpdateEmployeeRequest updateEmployeeRequest);
+
+    void deleteEmployeeById(Integer id);
+
+    List<EmployeeResponse> searchEmployeeByName(String name);
 }

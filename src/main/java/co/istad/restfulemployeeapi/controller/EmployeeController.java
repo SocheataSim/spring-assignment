@@ -2,8 +2,10 @@ package co.istad.restfulemployeeapi.controller;
 
 import co.istad.restfulemployeeapi.dto.CreateEmployeeRequest;
 import co.istad.restfulemployeeapi.dto.EmployeeResponse;
+import co.istad.restfulemployeeapi.dto.UpdateEmployeeRequest;
 import co.istad.restfulemployeeapi.service.EmployeeService;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +30,25 @@ public class EmployeeController {
 
     @PostMapping
     public EmployeeResponse createEmployee(
-            @RequestBody CreateEmployeeRequest createRequest
+            @Valid @RequestBody CreateEmployeeRequest createRequest
             ) {
         return service.createEmployee(createRequest);
+    }
+
+    @PutMapping("/{id}")
+    public EmployeeResponse updateEmployeeById(@PathVariable Integer id,
+                                               @Valid @RequestBody UpdateEmployeeRequest updateEmployeeRequest){
+        return service.updateEmployeeById(id,updateEmployeeRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteEmployeeById(@PathVariable Integer id){
+        service.deleteEmployeeById(id);
+    }
+
+    @GetMapping("/search")
+    public List<EmployeeResponse> searchEmployeeByName(@RequestParam String name){
+        return service.searchEmployeeByName(name);
     }
 
 }

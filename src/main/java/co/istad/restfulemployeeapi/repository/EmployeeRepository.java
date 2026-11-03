@@ -38,6 +38,10 @@ public class EmployeeRepository {
                 LocalDate.of(2026, 10, 30)
         );
         emp2.setIsActive(true);
+
+        employees.add(emp1);
+        employees.add(emp2);
+
     }
 
 }

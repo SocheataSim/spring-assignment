@@ -3,6 +3,7 @@ package co.istad.restfulemployeeapi.mapper;
 import co.istad.restfulemployeeapi.domain.Employee;
 import co.istad.restfulemployeeapi.dto.CreateEmployeeRequest;
 import co.istad.restfulemployeeapi.dto.EmployeeResponse;
+import co.istad.restfulemployeeapi.dto.UpdateEmployeeRequest;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
@@ -14,4 +15,5 @@ public interface EmployeeMapper {
     // Map from DTO to Domain
     Employee fromCreateEmployeeRequest(CreateEmployeeRequest createEmployeeRequest);
 
+    Employee fromUpdateEmployeeRequest(UpdateEmployeeRequest updateEmployeeRequest);
 }

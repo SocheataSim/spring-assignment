@@ -37,5 +37,4 @@ public class Employee {
         this.hireDate = hireDate;
         this.isActive = Boolean.TRUE;
     }
-
 }
