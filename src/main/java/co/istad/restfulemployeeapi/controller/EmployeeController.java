@@ -2,6 +2,7 @@ package co.istad.restfulemployeeapi.controller;
 
 import co.istad.restfulemployeeapi.dto.CreateEmployeeRequest;
 import co.istad.restfulemployeeapi.dto.EmployeeResponse;
+import co.istad.restfulemployeeapi.dto.PatchEmployeeRequest;
 import co.istad.restfulemployeeapi.dto.UpdateEmployeeRequest;
 import co.istad.restfulemployeeapi.service.EmployeeService;
 import io.swagger.v3.oas.models.security.SecurityScheme;
@@ -49,6 +50,12 @@ public class EmployeeController {
     @GetMapping("/search")
     public List<EmployeeResponse> searchEmployeeByName(@RequestParam String name){
         return service.searchEmployeeByName(name);
+    }
+
+    @PatchMapping("/{id}")
+    public EmployeeResponse patchEmployeeRequest(
+            @PathVariable Integer id,@Valid @RequestBody PatchEmployeeRequest patchEmployeeRequest){
+        return service.patchEmployeeById(id,patchEmployeeRequest);
     }
 
 }

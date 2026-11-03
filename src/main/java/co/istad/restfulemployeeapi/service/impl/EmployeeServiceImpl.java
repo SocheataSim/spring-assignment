@@ -3,6 +3,7 @@ package co.istad.restfulemployeeapi.service.impl;
 import co.istad.restfulemployeeapi.domain.Employee;
 import co.istad.restfulemployeeapi.dto.CreateEmployeeRequest;
 import co.istad.restfulemployeeapi.dto.EmployeeResponse;
+import co.istad.restfulemployeeapi.dto.PatchEmployeeRequest;
 import co.istad.restfulemployeeapi.dto.UpdateEmployeeRequest;
 import co.istad.restfulemployeeapi.mapper.EmployeeMapper;
 import co.istad.restfulemployeeapi.repository.EmployeeRepository;
@@ -108,6 +109,29 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .filter(emp -> emp.getName().toLowerCase().contains(name.toLowerCase()))
                 .map(employeeMapper::toResponse)
                 .toList();
+    }
+
+    @Override
+    public EmployeeResponse patchEmployeeById(Integer id, PatchEmployeeRequest patchEmployeeRequest) {
+        Employee employee = repository.getEmployees()
+                .stream().filter(emp -> emp.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee with id: %d not found".formatted(id)));
+        if(patchEmployeeRequest.name() != null){
+            employee.setName(patchEmployeeRequest.name());
+        }
+        if(patchEmployeeRequest.email() != null){
+            String newEmail = patchEmployeeRequest.email();
+            if(!newEmail.equals(employee.getEmail()) && checkIfEmailExists(newEmail)){
+                throw new ResponseStatusException(HttpStatus.CONFLICT,"Email already exists");
+            }
+            employee.setEmail(newEmail);
+        }
+        if(patchEmployeeRequest.salary() != null){
+            employee.setSalary(patchEmployeeRequest.salary());
+        }
+
+        return employeeMapper.toResponse(employee);
     }
 
 

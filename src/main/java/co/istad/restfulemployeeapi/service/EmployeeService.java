@@ -2,6 +2,7 @@ package co.istad.restfulemployeeapi.service;
 
 import co.istad.restfulemployeeapi.dto.CreateEmployeeRequest;
 import co.istad.restfulemployeeapi.dto.EmployeeResponse;
+import co.istad.restfulemployeeapi.dto.PatchEmployeeRequest;
 import co.istad.restfulemployeeapi.dto.UpdateEmployeeRequest;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface EmployeeService {
     void deleteEmployeeById(Integer id);
 
     List<EmployeeResponse> searchEmployeeByName(String name);
+
+    EmployeeResponse patchEmployeeById(Integer id, PatchEmployeeRequest patchEmployeeRequest);
 }
