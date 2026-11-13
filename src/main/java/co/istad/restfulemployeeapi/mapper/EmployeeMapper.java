@@ -3,8 +3,9 @@ package co.istad.restfulemployeeapi.mapper;
 import co.istad.restfulemployeeapi.domain.Employee;
 import co.istad.restfulemployeeapi.dto.CreateEmployeeRequest;
 import co.istad.restfulemployeeapi.dto.EmployeeResponse;
+import co.istad.restfulemployeeapi.dto.PatchEmployeeRequest;
 import co.istad.restfulemployeeapi.dto.UpdateEmployeeRequest;
-import org.mapstruct.Mapper;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface EmployeeMapper {
@@ -16,4 +17,17 @@ public interface EmployeeMapper {
     Employee fromCreateEmployeeRequest(CreateEmployeeRequest createEmployeeRequest);
 
     Employee fromUpdateEmployeeRequest(UpdateEmployeeRequest updateEmployeeRequest);
+
+    @BeanMapping(
+            nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
+    )
+    void updateEntity(
+            @MappingTarget Employee employee,
+            UpdateEmployeeRequest updateEmployeeRequest
+
+            );
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void patchEntity(
+            @MappingTarget Employee employee,
+            PatchEmployeeRequest request);
 }

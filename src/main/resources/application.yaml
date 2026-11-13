@@ -1,5 +1,16 @@
 spring:
   application:
     name: employee-api
+  datasource:
+    url: jdbc:postgresql://localhost:5555/employee_db
+    username: employee_user
+    password: employee_password
+  jpa:
+    hibernate:
+      ddl-auto: update #drop the table when we stop running the application, during development, test util our table is like what we want
+    show-sql: true
+    #show generated sql in log
+
 server:
   port: 8888
+

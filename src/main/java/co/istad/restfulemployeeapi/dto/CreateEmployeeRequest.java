@@ -1,7 +1,6 @@
 package co.istad.restfulemployeeapi.dto;
 
 import jakarta.validation.constraints.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,6 +11,7 @@ public record CreateEmployeeRequest(
         @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
         String name,
 
+        @NotBlank(message = "Email is required")
         @Email(message = "Invalid Email Format")
         String email,
 
@@ -19,9 +19,10 @@ public record CreateEmployeeRequest(
         @NotNull(message = "Salary is required")
         BigDecimal salary,
 
-        @DateTimeFormat(pattern = "yyyy-MM-dd")
 //        @NotBlank(message = "Hire date is required\n Format: YYYY-MM-DD")
-        String hireDate
+        @NotNull(message = "Hire Date is required")
+        @PastOrPresent(message = "Hire date can't be in the future")
+        LocalDate hireDate
 
 ) {
 }
