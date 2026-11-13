@@ -7,7 +7,7 @@ spring:
     password: employee_password
   jpa:
     hibernate:
-      ddl-auto: update #drop the table when we stop running the application, during development, test util our table is like what we want
+      ddl-auto: create-drop #drop the table when we stop running the application, during development, test util our table is like what we want
     show-sql: true
     #show generated sql in log
 
